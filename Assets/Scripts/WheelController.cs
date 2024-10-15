@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WheelController : MonoBehaviour
 {
+    Rigidbody rb;
     [SerializeField] WheelCollider frontRightWheel;
     [SerializeField] WheelCollider frontLeftWheel;
     [SerializeField] WheelCollider midRightWheel;
@@ -18,13 +19,16 @@ public class WheelController : MonoBehaviour
     [SerializeField] Transform rearRightTransform;
     [SerializeField] Transform rearLeftTransform;
 
+    [SerializeField] AudioSource engineSource;
+
     public float acceleration = 500f;
     public float breakingforce = 300f;
     public float maxTurnAngle = 15f;
+    public double milesPerHour = 0f;
 
     private float currAcceleration = 0f;
     private float currBreakingforce = 0f;
-    private float currTurnAngle = 0f;
+    private float currTurnAngle = 0;
 
     private void FixedUpdate()
     {
@@ -79,12 +83,15 @@ public class WheelController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        Vector3 v = transform.InverseTransformDirection(rb.velocity);
 
+        float pct = (v.z * 2.237f / 30f);
+        engineSource.pitch = 0.65f + pct * 0.5f;
     }
 }

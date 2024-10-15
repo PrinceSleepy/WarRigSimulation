@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Diagnostics;
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAI : MonoBehaviour, IDamage
 {
     [SerializeField] Transform target;
     NavMeshAgent agent;
+    [SerializeField] float enemyHP = 5f;
     float pathNextUpdate = 0;
     [SerializeField] float pathCoolDown = 1; //seconds
     float attackNextUpdate = 0;
@@ -15,7 +17,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] GameObject bombPrefab;
 
     bool targetInRange = false;
-
+ 
 
 
     // Start is called before the first frame update
@@ -33,6 +35,15 @@ public class EnemyAI : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("Player"))
+        {
+            PlayerCombat p = other.transform.root.GetComponent<PlayerCombat>();
+            if (p != null)
+            {
+                p.AddEnemy(this);
+            }
+        }
+
         if (other.CompareTag(target.tag))
         {
             targetInRange = true;
@@ -41,6 +52,14 @@ public class EnemyAI : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.CompareTag("Player"))
+        {
+            PlayerCombat p = other.transform.root.GetComponent<PlayerCombat>();
+            if (p != null)
+            {
+                p.RemoveEnemy(this);
+            }
+        }
         if (other.CompareTag(target.tag) && targetInRange)
         {
             targetInRange = false;
@@ -59,13 +78,29 @@ public class EnemyAI : MonoBehaviour
 
     void AttackPlayer()
     {
-        if (targetInRange && Time.time > attackNextUpdate) 
+        if (targetInRange && Time.time > attackNextUpdate)
         {
-                attackNextUpdate = Time.time + attackCoolDown;
-                Vector3 dir = target.root.position - transform.position;
-                GameObject go = Instantiate(bombPrefab, transform.position, Quaternion.LookRotation(dir));
-                Rigidbody rb = go.GetComponent<Rigidbody>();
-                rb.AddForce(dir * 50);
+            attackNextUpdate = Time.time + attackCoolDown;
+            //Vector3 dir = target.root.position - transform.position;
+            Vector3 dir = PlayerCombat.Instance.enemyTarget.position - transform.position;
+            GameObject go = Instantiate(bombPrefab, transform.position, Quaternion.LookRotation(dir));
+            Rigidbody rb = go.GetComponent<Rigidbody>();
+            rb.AddForce(dir * 50);
+        }
+    }
+
+    public void TakeDamage(int amount)
+    {
+        enemyHP -= amount;
+        if (enemyHP <= 0)
+        {
+            PlayerCombat.Instance.RemoveEnemy(this);
+            Destroy(gameObject);
         }
     }
 }
+
+//if (Input.GetKeyDown(KeyCode.Space))
+//{
+//    TakeDamage(100);
+//}

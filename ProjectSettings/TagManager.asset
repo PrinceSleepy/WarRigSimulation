@@ -8,6 +8,9 @@ TagManager:
   - RearRight
   - EnemyPos1
   - EnemyPos2
+  - Enemy
+  - Truck
+  - Trailer
   layers:
   - Default
   - TransparentFX
