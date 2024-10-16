@@ -7,6 +7,7 @@ using UnityEngine.Diagnostics;
 public class EnemyAI : MonoBehaviour, IDamage
 {
     [SerializeField] Transform target;
+    [SerializeField] List<Transform> targets;
     NavMeshAgent agent;
     [SerializeField] float enemyHP = 5f;
     float pathNextUpdate = 0;
@@ -23,6 +24,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
+        target = targets[0];
         agent = GetComponent<NavMeshAgent>();
         agent.destination = target.position;
     }
@@ -30,6 +32,15 @@ public class EnemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
+        //if(Vector3.Distance(transform.position, target.position) < attackRange)
+        //{
+        //    targetInRange = true;
+        //}
+        //else
+        //{
+        //    targetInRange = false;
+        //}
+
         MoveToDest();
         AttackPlayer();
     }
@@ -60,18 +71,19 @@ public class EnemyAI : MonoBehaviour, IDamage
                 p.RemoveEnemy(this);
             }
         }
-        if (other.CompareTag(target.tag) && targetInRange)
-        {
-            targetInRange = false;
-        }
+       if (other.CompareTag(target.tag) && targetInRange)
+       {
+           targetInRange = false;
+       }
     }
 
     void MoveToDest()
     {
+        if (GameManager.Instance.trailerDestroyed)
+            target = targets[1];
         if (Time.time > pathNextUpdate)
         {
             pathNextUpdate = Time.time;
-            print("set dest");
             agent.destination = target.position;
         }
     }

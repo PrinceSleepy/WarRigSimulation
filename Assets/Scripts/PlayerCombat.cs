@@ -27,7 +27,7 @@ public class PlayerCombat : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-
+        Attack();
     }
 
     public void AddEnemy(EnemyAI enemy)

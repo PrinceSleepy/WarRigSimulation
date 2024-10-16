@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BombPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 6140285217348896096, guid: 064d38c721058694f96f611c4b6c0a5e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6324703025898779094, guid: 064d38c721058694f96f611c4b6c0a5e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -272.10712
@@ -52,6 +56,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8421511283993854340, guid: 064d38c721058694f96f611c4b6c0a5e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -86,12 +94,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.6838074, y: 0.27313304, z: 0.29742432}
+  m_Center: {x: 0.012161255, y: 0.13375425, z: 0}
 --- !u!114 &-6158419909374505407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bombDMG: 2
+  explosionPrefab: {fileID: 1411588298947990, guid: 22429e62552901f4d94bca4295a9886a, type: 3}
 --- !u!54 &6966309092964498997
 Rigidbody:
   m_ObjectHideFlags: 0
