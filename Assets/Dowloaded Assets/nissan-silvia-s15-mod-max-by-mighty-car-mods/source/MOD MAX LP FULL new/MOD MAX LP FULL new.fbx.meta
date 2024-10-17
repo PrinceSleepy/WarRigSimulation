@@ -3,7 +3,32 @@ guid: ba2fa042c07531c4680b4f162596c9c0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body.001
+    second: {fileID: 2100000, guid: 780fcccb56ccd3c4d853cbbf1f339e0e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass.001
+    second: {fileID: 2100000, guid: 569ced85abed3d84fa8c750602a8c995, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Interior.001
+    second: {fileID: 2100000, guid: 2dd84254a94e2c14b8a99a3ee607b495, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mod Max Tune
+    second: {fileID: 2100000, guid: 795a31e9a2bc16a47a160aee36ae25c5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wheels.001
+    second: {fileID: 2100000, guid: 9912e371ea9ed2c4b81747ef06b774c5, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

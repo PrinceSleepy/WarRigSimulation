@@ -28,6 +28,7 @@ public class TrailerCombat : MonoBehaviour, IDamage
         }
         if (trailerHP <= 0)
         {
+            Camera.main.GetComponent<Follow>().index = 1;
             GameManager.Instance.trailerDestroyed = true;
             GameObject explosion =Instantiate(explosionPrefab, transform.position, transform.rotation);
             Destroy(explosion, 5);

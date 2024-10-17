@@ -76,7 +76,7 @@ public class WheelController : MonoBehaviour
             frontLeftWheel.steerAngle = currTurnAngle;
             frontRightWheel.steerAngle = currTurnAngle;
         }
-       
+        print(Input.GetAxis("Vertical"));
     }
     void UpdateWheel(WheelCollider col, Transform trans)
     {
