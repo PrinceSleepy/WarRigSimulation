@@ -5,6 +5,7 @@ using UnityEngine;
 public class WheelController : MonoBehaviour
 {
     Rigidbody rb;
+    [SerializeField] PlayerCombat player;
     [SerializeField] WheelCollider frontRightWheel;
     [SerializeField] WheelCollider frontLeftWheel;
     [SerializeField] WheelCollider midRightWheel;
@@ -32,41 +33,50 @@ public class WheelController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Get forward/reverse acceleration from the vertical axis (W and S keys)
-        currAcceleration = acceleration * Input.GetAxis("Vertical");
-        //If pressing space bar give currBreakingForce a value
-        if (Input.GetKey(KeyCode.Space))
-            currBreakingforce = breakingforce;
-        else
-            currBreakingforce = 0f;
-        //Apply acceleration to rear wheels
-        rearRightWheel.motorTorque = currAcceleration;
-        rearLeftWheel.motorTorque = currAcceleration;
-        //Apply acceleration to mid wheels later!!
+        if (player.isAlive)
+        {
+            //Get forward/reverse acceleration from the vertical axis (W and S keys)
+            currAcceleration = acceleration * Input.GetAxis("Vertical");
+            //If pressing space bar give currBreakingForce a value
+            if (Input.GetKey(KeyCode.Space))
+                currBreakingforce = breakingforce;
+            else
+                currBreakingforce = 0f;
+            //Apply acceleration to rear wheels
+            rearRightWheel.motorTorque = currAcceleration;
+            rearLeftWheel.motorTorque = currAcceleration;
+            //Apply acceleration to mid wheels later!!
 
 
-        frontRightWheel.brakeTorque = currBreakingforce;
-        frontLeftWheel.brakeTorque = currBreakingforce;
-        midRightWheel.brakeTorque = currBreakingforce;
-        midLeftWheel.brakeTorque = currBreakingforce;
-        rearRightWheel.brakeTorque = currBreakingforce;
-        rearLeftWheel.brakeTorque = currBreakingforce;
+            frontRightWheel.brakeTorque = currBreakingforce;
+            frontLeftWheel.brakeTorque = currBreakingforce;
+            midRightWheel.brakeTorque = currBreakingforce;
+            midLeftWheel.brakeTorque = currBreakingforce;
+            rearRightWheel.brakeTorque = currBreakingforce;
+            rearLeftWheel.brakeTorque = currBreakingforce;
 
-        //Steering
-        currTurnAngle = maxTurnAngle * Input.GetAxis("Horizontal");
-        frontLeftWheel.steerAngle = currTurnAngle;
-        frontRightWheel.steerAngle = currTurnAngle;
+            //Steering
+            currTurnAngle = maxTurnAngle * Input.GetAxis("Horizontal");
+          
+            frontLeftWheel.steerAngle = currTurnAngle;
+            frontRightWheel.steerAngle = currTurnAngle;
 
-        //update wheel meshes
-        UpdateWheel(frontRightWheel, frontRightTransform);
-        UpdateWheel(frontLeftWheel, frontLeftTransform);
-        UpdateWheel(midLeftWheel, midLeftTransform);
-        UpdateWheel(midRightWheel, midRightTransform);
-        UpdateWheel(rearLeftWheel, rearLeftTransform);
-        UpdateWheel(rearRightWheel, rearRightTransform);
-      
+            //update wheel meshes
+            UpdateWheel(frontRightWheel, frontRightTransform);
+            UpdateWheel(frontLeftWheel, frontLeftTransform);
+            UpdateWheel(midLeftWheel, midLeftTransform);
+            UpdateWheel(midRightWheel, midRightTransform);
+            UpdateWheel(rearLeftWheel, rearLeftTransform);
+            UpdateWheel(rearRightWheel, rearRightTransform);
+        }
+        else 
+        {
+            currTurnAngle = maxTurnAngle;
 
-
+            frontLeftWheel.steerAngle = currTurnAngle;
+            frontRightWheel.steerAngle = currTurnAngle;
+        }
+       
     }
     void UpdateWheel(WheelCollider col, Transform trans)
     {

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3681189809038127270}
   - component: {fileID: 3049546948706465548}
   - component: {fileID: 7613335078869841464}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 2892333935809655436}
   - component: {fileID: 6254318195425112614}
   - component: {fileID: -6672323962996466080}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerBomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -282.44922, y: 0.323, z: -395.86188}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3681189809038127270}
@@ -140,7 +140,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -164,8 +164,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.12219238, y: 0.29271784, z: 0.09851074}
-  m_Center: {x: -0.003540039, y: 0.124179736, z: 0.0034484863}
+  m_Size: {x: 0.042999268, y: 0.2554838, z: 0.05029297}
+  m_Center: {x: -0.0005950928, y: 0.12545654, z: -0.00033569336}
 --- !u!114 &-6672323962996466080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,3 +179,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bombDMG: 2
+  explosionPrefab: {fileID: 1224328841576138, guid: 4dae77afe85342749b810219ddf11e1d, type: 3}

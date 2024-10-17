@@ -16,9 +16,10 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] float attackCoolDown = 1;
     [SerializeField] float attackRange = 0;
     [SerializeField] GameObject bombPrefab;
+    [SerializeField] bool isAggro = false;
 
     bool targetInRange = false;
- 
+
 
 
     // Start is called before the first frame update
@@ -26,7 +27,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         target = targets[0];
         agent = GetComponent<NavMeshAgent>();
-        agent.destination = target.position;
+        //agent.destination = target.position;
     }
 
     // Update is called once per frame
@@ -41,8 +42,17 @@ public class EnemyAI : MonoBehaviour, IDamage
         //    targetInRange = false;
         //}
 
-        MoveToDest();
-        AttackPlayer();
+        float distToTarget = Vector3.Distance(transform.position, PlayerCombat.Instance.enemyTarget.position);
+        if(distToTarget < 30)
+        {
+            isAggro = true;
+        }
+
+        if (isAggro)
+        {
+            MoveToDest();
+            AttackPlayer();
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -71,16 +81,19 @@ public class EnemyAI : MonoBehaviour, IDamage
                 p.RemoveEnemy(this);
             }
         }
-       if (other.CompareTag(target.tag) && targetInRange)
-       {
-           targetInRange = false;
-       }
+        if (other.CompareTag(target.tag) && targetInRange)
+        {
+            targetInRange = false;
+        }
     }
 
     void MoveToDest()
     {
         if (GameManager.Instance.trailerDestroyed)
+        {
             target = targets[1];
+        }
+
         if (Time.time > pathNextUpdate)
         {
             pathNextUpdate = Time.time;
@@ -111,8 +124,3 @@ public class EnemyAI : MonoBehaviour, IDamage
         }
     }
 }
-
-//if (Input.GetKeyDown(KeyCode.Space))
-//{
-//    TakeDamage(100);
-//}

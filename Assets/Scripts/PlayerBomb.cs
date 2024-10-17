@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerBomb : MonoBehaviour
 {
     [SerializeField] int bombDMG;
+    [SerializeField] GameObject explosionPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,16 +17,35 @@ public class PlayerBomb : MonoBehaviour
     {
         
     }
-
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
+        Collider other = collision.collider;
+
+        print("Bomb hit " + other.gameObject.name);
+
         if (other.CompareTag("Enemy"))
         {
-            IDamage dmg = GetComponent<IDamage>();
-            if (dmg != null)
+            IDamage damage = other.transform.root.GetComponent<IDamage>();
+            if (damage != null)
             {
-                dmg.TakeDamage(bombDMG);
+                damage.TakeDamage(bombDMG);
             }
         }
+
+        GameObject explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
+        Destroy(explosion, 5);
+        Destroy(gameObject);
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("Enemy"))
+    //    {
+    //        IDamage dmg = GetComponent<IDamage>();
+    //        if (dmg != null)
+    //        {
+    //            dmg.TakeDamage(bombDMG);
+    //        }
+    //    }
+    //}
 }

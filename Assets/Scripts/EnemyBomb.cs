@@ -12,7 +12,7 @@ public class EnemyBomb : MonoBehaviour
     {
         Collider other = collision.collider;
 
-        print("Bomb hit " + other.gameObject.name);
+        //print("Bomb hit " + other.gameObject.name);
 
         if (other.CompareTag("Truck"))
         {
