@@ -115,7 +115,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         }
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         enemyHP -= amount;
         if (enemyHP <= 0)

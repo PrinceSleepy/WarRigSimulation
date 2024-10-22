@@ -1,15 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerBomb : MonoBehaviour
 {
     [SerializeField] int bombDMG;
     [SerializeField] GameObject explosionPrefab;
+    public Transform target;
+    Rigidbody rb;
+    [SerializeField] float speed = 50f;
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         
+    }
+
+    public void SetTarget(Transform _target)
+    {
+        target = _target;
+    }
+    private void FixedUpdate()
+    {
+        Vector3 dir = target.position - rb.position;
+        rb.velocity = dir.normalized * speed;
     }
 
     // Update is called once per frame
@@ -25,7 +40,7 @@ public class PlayerBomb : MonoBehaviour
 
         if (other.CompareTag("Enemy"))
         {
-            IDamage damage = other.transform.root.GetComponent<IDamage>();
+            IDamage damage = other.transform.GetComponent<IDamage>();
             if (damage != null)
             {
                 damage.TakeDamage(bombDMG);

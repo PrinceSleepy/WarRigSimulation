@@ -102,6 +102,7 @@ public class WheelController : MonoBehaviour
     {
         PlatformController.singleton.Roll = Mathf.DeltaAngle(transform.eulerAngles.z, 0);
         PlatformController.singleton.Pitch = -Mathf.DeltaAngle(transform.eulerAngles.x, 0);
+        PlatformController.singleton.Yaw = Input.GetAxis("Horizontal") * 5;
         Vector3 v = transform.InverseTransformDirection(rb.velocity);
 
         float pct = (v.z * 2.237f / 30f);

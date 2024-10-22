@@ -15,6 +15,7 @@ public class PlayerCombat : MonoBehaviour, IDamage
     [SerializeField] List<Transform> enemyTargets;
     [SerializeField] AudioSource aud;
     [SerializeField] AudioClip truckSound;
+    [SerializeField] GameObject flameBurst;
         
     public Transform enemyTarget;
     public Transform truck;
@@ -38,6 +39,14 @@ public class PlayerCombat : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.F))
+        {
+            if (!flameBurst.activeSelf) flameBurst.SetActive(true);
+        }
+        else
+        {
+            if (flameBurst.activeSelf) flameBurst.SetActive(false);
+        }
         if (isAlive)
         {
             Attack();
@@ -81,13 +90,15 @@ public class PlayerCombat : MonoBehaviour, IDamage
             Transform target = enemyList[0].transform;
             Vector3 dir = target.position - transform.position;
             GameObject go = Instantiate(bombPrefab, transform.position, Quaternion.LookRotation(dir));
-            Rigidbody rb = go.GetComponent<Rigidbody>();
-            rb.AddForce(dir * 50);
+            PlayerBomb bomb = go.GetComponent<PlayerBomb>();
+            bomb.SetTarget(target);
+            //Rigidbody rb = go.GetComponent<Rigidbody>();
+            //rb.AddForce(dir * 50);
         }
         attackCoroutine = null;
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         if(damageCoroutine == null) 
             damageCoroutine = StartCoroutine(DamageCoroutine(3,1));
