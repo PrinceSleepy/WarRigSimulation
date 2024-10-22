@@ -94,11 +94,14 @@ public class WheelController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        PlatformController.singleton.Init("COM7", 115200);
     }
 
     // Update is called once per frame
     void Update()
     {
+        PlatformController.singleton.Roll = Mathf.DeltaAngle(transform.eulerAngles.z, 0);
+        PlatformController.singleton.Pitch = -Mathf.DeltaAngle(transform.eulerAngles.x, 0);
         Vector3 v = transform.InverseTransformDirection(rb.velocity);
 
         float pct = (v.z * 2.237f / 30f);

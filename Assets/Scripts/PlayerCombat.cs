@@ -13,11 +13,15 @@ public class PlayerCombat : MonoBehaviour, IDamage
     [SerializeField] GameObject bombPrefab;
     [SerializeField] GameObject explosionPrefab;
     [SerializeField] List<Transform> enemyTargets;
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip truckSound;
+        
     public Transform enemyTarget;
     public Transform truck;
     public bool isAlive = true;
 
     Coroutine attackCoroutine;
+    Coroutine damageCoroutine;
 
     private void Awake()
     {
@@ -69,12 +73,13 @@ public class PlayerCombat : MonoBehaviour, IDamage
 
     IEnumerator AttackCoroutine()
     {
+        aud.PlayOneShot(truckSound);
         yield return new WaitForSeconds(2);
         //fire at enemy that is in range
         if (enemyList.Count > 0)
         {
             Transform target = enemyList[0].transform;
-            Vector3 dir = target.root.position - transform.position;
+            Vector3 dir = target.position - transform.position;
             GameObject go = Instantiate(bombPrefab, transform.position, Quaternion.LookRotation(dir));
             Rigidbody rb = go.GetComponent<Rigidbody>();
             rb.AddForce(dir * 50);
@@ -84,6 +89,9 @@ public class PlayerCombat : MonoBehaviour, IDamage
 
     public void TakeDamage(int amount)
     {
+        if(damageCoroutine == null) 
+            damageCoroutine = StartCoroutine(DamageCoroutine(3,1));
+       
         if (playerHP > 0)
         {
             playerHP -= amount;
@@ -96,6 +104,21 @@ public class PlayerCombat : MonoBehaviour, IDamage
             isAlive = false;
             
         }
+    }
+
+    IEnumerator DamageCoroutine(float strength, float duration)
+    {
+        float curTime = 0;
+        while (curTime < duration)
+        {
+            PlatformController.singleton.Surge = Random.Range(-strength, strength);
+            PlatformController.singleton.Sway = Random.Range(-strength, strength);
+            curTime += Time.deltaTime;
+            yield return null;
+        }
+        PlatformController.singleton.Surge = 0;
+        PlatformController.singleton.Sway = 0;
+        damageCoroutine = null;
     }
 
     void ChangeEnemyTarget()

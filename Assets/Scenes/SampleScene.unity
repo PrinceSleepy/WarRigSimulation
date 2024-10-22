@@ -354,6 +354,8 @@ MonoBehaviour:
   enemyTargets:
   - {fileID: 955013116}
   - {fileID: 1705791933}
+  aud: {fileID: 59021048}
+  truckSound: {fileID: 8300000, guid: badbed898bcb1c24ca527c44b22f73df, type: 3}
   enemyTarget: {fileID: 955013116}
   truck: {fileID: 0}
   isAlive: 1
@@ -479,6 +481,102 @@ Rigidbody:
   m_CorrespondingSourceObject: {fileID: 5325647567608921337, guid: dd07a76d2709a5c4cbfea78dbb74f466, type: 3}
   m_PrefabInstance: {fileID: 7938382069912315875}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &59021052
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59021036}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &83081855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -628,7 +726,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 382410450}
     m_Modifications:
     - target: {fileID: 1000013063830730, guid: 43c7a2ea4d301a44fbcc804aeab4aa1b, type: 3}
       propertyPath: m_Name
@@ -636,15 +734,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013960232312, guid: 43c7a2ea4d301a44fbcc804aeab4aa1b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -431.98407
+      value: -428.18777
       objectReference: {fileID: 0}
     - target: {fileID: 4000013960232312, guid: 43c7a2ea4d301a44fbcc804aeab4aa1b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0005452124
+      value: -19.009762
       objectReference: {fileID: 0}
     - target: {fileID: 4000013960232312, guid: 43c7a2ea4d301a44fbcc804aeab4aa1b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -387.46646
+      value: -393.329
       objectReference: {fileID: 0}
     - target: {fileID: 4000013960232312, guid: 43c7a2ea4d301a44fbcc804aeab4aa1b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -656,7 +754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013960232312, guid: 43c7a2ea4d301a44fbcc804aeab4aa1b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4000013960232312, guid: 43c7a2ea4d301a44fbcc804aeab4aa1b, type: 3}
       propertyPath: m_LocalRotation.z
@@ -1518,6 +1616,7 @@ Transform:
   m_Children:
   - {fileID: 1310495526}
   - {fileID: 1000021506}
+  - {fileID: 514789867}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &430433769
@@ -1976,6 +2075,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6174302309905379857, guid: 10ce04a186c562d49b831590255992bd, type: 3}
   m_PrefabInstance: {fileID: 446894294}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &514789867 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4000013960232312, guid: 43c7a2ea4d301a44fbcc804aeab4aa1b, type: 3}
+  m_PrefabInstance: {fileID: 125787177}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &529466022
 PrefabInstance:
@@ -6553,6 +6657,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5325647567608921337, guid: dd07a76d2709a5c4cbfea78dbb74f466, type: 3}
+      propertyPath: m_Drag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325647567608921337, guid: dd07a76d2709a5c4cbfea78dbb74f466, type: 3}
       propertyPath: m_Mass
       value: 4000
       objectReference: {fileID: 0}
@@ -6746,6 +6854,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1145164718849848869, guid: dd07a76d2709a5c4cbfea78dbb74f466, type: 3}
       insertIndex: -1
       addedObject: {fileID: 59021048}
+    - targetCorrespondingSourceObject: {fileID: 1145164718849848869, guid: dd07a76d2709a5c4cbfea78dbb74f466, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 59021052}
     - targetCorrespondingSourceObject: {fileID: 3602717649084839772, guid: dd07a76d2709a5c4cbfea78dbb74f466, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2086386089}
@@ -6763,4 +6874,3 @@ SceneRoots:
   - {fileID: 1017077696}
   - {fileID: 1934709148}
   - {fileID: 2112828980}
-  - {fileID: 125787177}
