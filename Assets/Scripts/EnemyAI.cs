@@ -16,6 +16,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] float attackCoolDown = 1;
     [SerializeField] float attackRange = 0;
     [SerializeField] GameObject bombPrefab;
+    [SerializeField] float aggroDist = 5;
     [SerializeField] bool isAggro = false;
 
     bool targetInRange = false;
@@ -43,7 +44,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         //}
 
         float distToTarget = Vector3.Distance(transform.position, PlayerCombat.Instance.enemyTarget.position);
-        if(distToTarget < 30)
+        if(distToTarget < aggroDist)
         {
             isAggro = true;
         }
