@@ -52,15 +52,20 @@ public class PlayerBomb : MonoBehaviour
         Destroy(gameObject);
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag("Enemy"))
-    //    {
-    //        IDamage dmg = GetComponent<IDamage>();
-    //        if (dmg != null)
-    //        {
-    //            dmg.TakeDamage(bombDMG);
-    //        }
-    //    }
-    //}
+    private void OnTriggerEnter(Collider other)
+    {
+        print("Bomb hit " + other.gameObject.name);
+        if (other.CompareTag("Enemy"))
+        {
+            IDamage dmg = other.GetComponent<IDamage>();
+            if (dmg != null)
+            {
+                dmg.TakeDamage(bombDMG);
+            }
+
+        }
+        GameObject explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
+        Destroy(explosion, 5);
+        Destroy(gameObject);
+    }
 }

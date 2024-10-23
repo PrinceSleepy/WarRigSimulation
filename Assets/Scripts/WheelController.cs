@@ -5,6 +5,7 @@ using UnityEngine;
 public class WheelController : MonoBehaviour
 {
     Rigidbody rb;
+    [SerializeField] Rigidbody trailerRB;
     [SerializeField] PlayerCombat player;
     [SerializeField] WheelCollider frontRightWheel;
     [SerializeField] WheelCollider frontLeftWheel;
@@ -33,12 +34,13 @@ public class WheelController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        print(trailerRB.centerOfMass);
         if (player.isAlive)
         {
             //Get forward/reverse acceleration from the vertical axis (W and S keys)
             currAcceleration = acceleration * Input.GetAxis("Vertical");
             //If pressing space bar give currBreakingForce a value
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetButton("EmergencyBrake"))
                 currBreakingforce = breakingforce;
             else
                 currBreakingforce = 0f;
@@ -76,7 +78,7 @@ public class WheelController : MonoBehaviour
             frontLeftWheel.steerAngle = currTurnAngle;
             frontRightWheel.steerAngle = currTurnAngle;
         }
-        print(Input.GetAxis("Vertical"));
+        //print(Input.GetAxis("Vertical"));
     }
     void UpdateWheel(WheelCollider col, Transform trans)
     {
@@ -100,6 +102,10 @@ public class WheelController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButtonDown("Restart"))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        }
         PlatformController.singleton.Roll = Mathf.DeltaAngle(transform.eulerAngles.z, 0);
         PlatformController.singleton.Pitch = -Mathf.DeltaAngle(transform.eulerAngles.x, 0);
         PlatformController.singleton.Yaw = Input.GetAxis("Horizontal") * 5;

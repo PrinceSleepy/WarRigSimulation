@@ -138,7 +138,7 @@ public class PlayerCombat : MonoBehaviour, IDamage
     {
         if (!GameManager.Instance.trailerDestroyed)
         {
-            if (Input.GetKey(KeyCode.F))
+            if (Input.GetButton("Fire2"))
             {
                 if (!flameBurstLeft.activeSelf && !flameBurstRight.activeSelf)
                 {
