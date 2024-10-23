@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,9 +17,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject menuWin;
     [SerializeField] public GameObject menuLose;
 
-    public Image engine1HPBar;
-    public Image engine2HPBar;
-    public Image trailerHPBar;
+    public Slider playerHPBar;
+    public Slider trailerHPBar;
+    public float gameTime = 0;
+    [SerializeField] TextMeshProUGUI gameTimeTextField;
 
 
     private void Awake()
@@ -36,6 +38,13 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        gameTime += Time.deltaTime;
+        TimeSpan formattedTime = TimeSpan.FromSeconds(gameTime);
+        gameTimeTextField.text = formattedTime.ToString(@"mm\:ss\:fff");
+    }
+
+    public void WinGame()
+    {
+      menuWin.SetActive(true);
     }
 }

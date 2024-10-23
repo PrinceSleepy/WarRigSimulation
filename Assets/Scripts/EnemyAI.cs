@@ -108,10 +108,18 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             attackNextUpdate = Time.time + attackCoolDown;
             //Vector3 dir = target.root.position - transform.position;
-            Vector3 dir = PlayerCombat.Instance.enemyTarget.position - transform.position;
+
+            Vector3 worldVector = GameManager.Instance.truck.GetComponent<Rigidbody>().velocity;
+            float speed = GameManager.Instance.truck.transform.InverseTransformDirection(worldVector).z;
+
+            Vector3 leadVector = GameManager.Instance.truck.transform.forward;
+            //Debug.DrawLine(transform.position, PlayerCombat.Instance.enemyTarget.position + leadVector * speed, Color.green);
+
+
+            Vector3 dir = (PlayerCombat.Instance.enemyTarget.position + leadVector * speed) - transform.position;
             GameObject go = Instantiate(bombPrefab, transform.position, Quaternion.LookRotation(dir));
             Rigidbody rb = go.GetComponent<Rigidbody>();
-            rb.AddForce(dir * 50);
+            rb.AddForce(dir * 3, ForceMode.VelocityChange);
         }
     }
 

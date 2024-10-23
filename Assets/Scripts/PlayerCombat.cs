@@ -7,7 +7,8 @@ public class PlayerCombat : MonoBehaviour, IDamage
 {
     public static PlayerCombat Instance;
 
-    [SerializeField] float playerHP = 10f;
+    public float playerHP = 10f;
+    [SerializeField] float playerMaxHP = 10f;
     //bool enemyInRange = false;
     [SerializeField] List<EnemyAI> enemyList;
     [SerializeField] GameObject bombPrefab;
@@ -33,6 +34,7 @@ public class PlayerCombat : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
+        playerHP = playerMaxHP;
         enemyList = new List<EnemyAI>();
         enemyTarget = enemyTargets[0];
     }
@@ -100,6 +102,7 @@ public class PlayerCombat : MonoBehaviour, IDamage
         if (playerHP > 0)
         {
             playerHP -= amount;
+            GameManager.Instance.playerHPBar.value = playerHP / playerMaxHP;
         }
         if (playerHP <= 0)
         {

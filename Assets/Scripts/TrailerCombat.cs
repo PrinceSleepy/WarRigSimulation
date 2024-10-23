@@ -5,14 +5,15 @@ using UnityEngine;
 public class TrailerCombat : MonoBehaviour, IDamage
 {
 
-    [SerializeField] float trailerHP = 10f;
+    public float trailerHP = 10f;
+    [SerializeField] float trailerMaxHP = 10f;
     [SerializeField] GameObject explosionPrefab;
     Coroutine damageCoroutine;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        trailerHP = trailerMaxHP;   
     }
 
     // Update is called once per frame
@@ -31,6 +32,7 @@ public class TrailerCombat : MonoBehaviour, IDamage
         {
         
             trailerHP -= amount;
+            GameManager.Instance.trailerHPBar.value = trailerHP / trailerMaxHP;
         }
         if (trailerHP <= 0)
         {

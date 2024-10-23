@@ -34,7 +34,6 @@ public class WheelController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        print(trailerRB.centerOfMass);
         if (player.isAlive)
         {
             //Get forward/reverse acceleration from the vertical axis (W and S keys)
