@@ -15,7 +15,8 @@ public class PlayerCombat : MonoBehaviour, IDamage
     [SerializeField] List<Transform> enemyTargets;
     [SerializeField] AudioSource aud;
     [SerializeField] AudioClip truckSound;
-    [SerializeField] GameObject flameBurst;
+    [SerializeField] GameObject flameBurstLeft;
+    [SerializeField] GameObject flameBurstRight;
         
     public Transform enemyTarget;
     public Transform truck;
@@ -39,14 +40,7 @@ public class PlayerCombat : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.F))
-        {
-            if (!flameBurst.activeSelf) flameBurst.SetActive(true);
-        }
-        else
-        {
-            if (flameBurst.activeSelf) flameBurst.SetActive(false);
-        }
+        FlameBurstAttack();
         if (isAlive)
         {
             Attack();
@@ -137,6 +131,29 @@ public class PlayerCombat : MonoBehaviour, IDamage
         if (GameManager.Instance.trailerDestroyed)
         {
             enemyTarget = enemyTargets[1];
+        }
+    }
+
+    void FlameBurstAttack()
+    {
+        if (!GameManager.Instance.trailerDestroyed)
+        {
+            if (Input.GetKey(KeyCode.F))
+            {
+                if (!flameBurstLeft.activeSelf && !flameBurstRight.activeSelf)
+                {
+                    flameBurstLeft.SetActive(true);
+                    flameBurstRight.SetActive(true);
+                }
+            }
+            else
+            {
+                if (flameBurstLeft.activeSelf && flameBurstRight.activeSelf)
+                {
+                    flameBurstLeft.SetActive(false);
+                    flameBurstRight.SetActive(false);
+                }
+            }
         }
     }
 }
