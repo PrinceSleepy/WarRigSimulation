@@ -36,6 +36,7 @@ public class TrailerCombat : MonoBehaviour, IDamage
         }
         if (trailerHP <= 0)
         {
+            GameManager.Instance.truck.GetComponent<PlayerCombat>().DamageShake(5, 1);
             Camera.main.GetComponent<Follow>().index = 1;
             GameManager.Instance.trailerDestroyed = true;
             GameObject explosion =Instantiate(explosionPrefab, transform.position, transform.rotation);

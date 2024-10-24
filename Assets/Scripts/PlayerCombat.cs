@@ -96,8 +96,7 @@ public class PlayerCombat : MonoBehaviour, IDamage
 
     public void TakeDamage(float amount)
     {
-        if(damageCoroutine == null) 
-            damageCoroutine = StartCoroutine(DamageCoroutine(3,1));
+        DamageShake(3,1);
        
         if (playerHP > 0)
         {
@@ -114,7 +113,13 @@ public class PlayerCombat : MonoBehaviour, IDamage
             
         }
     }
-
+    public void DamageShake(float strength, float duration)
+    {
+        if (damageCoroutine == null)
+        {
+            StartCoroutine(DamageCoroutine(strength,duration));
+        }
+    }
     IEnumerator DamageCoroutine(float strength, float duration)
     {
         float curTime = 0;

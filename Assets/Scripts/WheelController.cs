@@ -24,6 +24,8 @@ public class WheelController : MonoBehaviour
     [SerializeField] RectTransform speedoNeedle;
 
     [SerializeField] AudioSource engineSource;
+    [SerializeField] ParticleSystem dust;
+
 
     public float acceleration = 500f;
     public float breakingforce = 300f;
@@ -39,7 +41,7 @@ public class WheelController : MonoBehaviour
         if (player.isAlive)
         {
             //Get forward/reverse acceleration from the vertical axis (W and S keys)
-            currAcceleration = acceleration * Input.GetAxis("Vertical");
+            currAcceleration = acceleration * Input.GetAxis("Vertical") * 2;
             //If pressing space bar give currBreakingForce a value
             if (Input.GetButton("EmergencyBrake"))
                 currBreakingforce = breakingforce;
@@ -115,8 +117,11 @@ public class WheelController : MonoBehaviour
         float pct = Mathf.Clamp01(v.z * 2.237f / 80f);
         engineSource.pitch = 0.65f + pct * 0.5f;
 
+        var emission = dust.emission;
+        emission.rateOverTime = pct * 100;
+
         float guageVal = Mathf.DeltaAngle(-88.5f + 177 * pct,0);
-        print(guageVal);
+        //print(guageVal);
         speedoNeedle.rotation = Quaternion.Slerp(speedoNeedle.rotation, Quaternion.Euler(0,0,guageVal),0.1f);
         //speedoNeedle.eulerAngles = Vector3.Slerp(speedoNeedle.eulerAngles, Quaternion.Euler(0, 0, guageVal), 0.1f); 
         //speedoNeedle.eulerAngles = new 
