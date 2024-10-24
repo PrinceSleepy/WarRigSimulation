@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
     public GameObject trailer;
 
     public bool trailerDestroyed = false;
-    [SerializeField] public GameObject menuActive;
     [SerializeField] public GameObject menuWin;
     [SerializeField] public GameObject menuLose;
 
@@ -21,6 +20,8 @@ public class GameManager : MonoBehaviour
     public Slider trailerHPBar;
     public float gameTime = 0;
     [SerializeField] TextMeshProUGUI gameTimeTextField;
+    public string finalTime;
+    [SerializeField] private TextMeshProUGUI finalTimeTextField;
 
 
     private void Awake()
@@ -45,6 +46,14 @@ public class GameManager : MonoBehaviour
 
     public void WinGame()
     {
-      menuWin.SetActive(true);
+        finalTime = gameTimeTextField.text;
+        gameTimeTextField.gameObject.SetActive(false);
+        finalTimeTextField.text = finalTime;
+        menuWin.SetActive(true);
+    }
+
+    public void LoseGame()
+    {
+        menuLose.SetActive(true);
     }
 }

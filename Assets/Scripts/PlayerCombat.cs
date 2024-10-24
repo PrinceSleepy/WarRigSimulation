@@ -107,6 +107,7 @@ public class PlayerCombat : MonoBehaviour, IDamage
         if (playerHP <= 0)
         {
             //you lose
+            GameManager.Instance.LoseGame();
             GameObject explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
             Destroy(explosion, 5);
             isAlive = false;
