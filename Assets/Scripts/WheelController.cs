@@ -21,6 +21,8 @@ public class WheelController : MonoBehaviour
     [SerializeField] Transform rearRightTransform;
     [SerializeField] Transform rearLeftTransform;
 
+    [SerializeField] RectTransform speedoNeedle;
+
     [SerializeField] AudioSource engineSource;
 
     public float acceleration = 500f;
@@ -110,7 +112,14 @@ public class WheelController : MonoBehaviour
         PlatformController.singleton.Yaw = Input.GetAxis("Horizontal") * 5;
         Vector3 v = transform.InverseTransformDirection(rb.velocity);
 
-        float pct = (v.z * 2.237f / 30f);
+        float pct = Mathf.Clamp01(v.z * 2.237f / 80f);
         engineSource.pitch = 0.65f + pct * 0.5f;
+
+        float guageVal = Mathf.DeltaAngle(-88.5f + 177 * pct,0);
+        print(guageVal);
+        speedoNeedle.rotation = Quaternion.Slerp(speedoNeedle.rotation, Quaternion.Euler(0,0,guageVal),0.1f);
+        //speedoNeedle.eulerAngles = Vector3.Slerp(speedoNeedle.eulerAngles, Quaternion.Euler(0, 0, guageVal), 0.1f); 
+        //speedoNeedle.eulerAngles = new 
+
     }
 }

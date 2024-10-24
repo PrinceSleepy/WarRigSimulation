@@ -10,13 +10,10 @@ public class PlayerBomb : MonoBehaviour
     public Transform target;
     Rigidbody rb;
     [SerializeField] float speed = 50f;
-    AudioSource aud;
-    [SerializeField] AudioClip explosionSFX;
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        aud = GetComponent<AudioSource>();        
+        rb = GetComponent<Rigidbody>();     
     }
 
     public void SetTarget(Transform _target)
@@ -48,7 +45,6 @@ public class PlayerBomb : MonoBehaviour
                 damage.TakeDamage(bombDMG);
             }
         }
-        aud.PlayOneShot(explosionSFX);
         GameObject explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
         Destroy(explosion, 5);
         Destroy(gameObject);
@@ -66,7 +62,6 @@ public class PlayerBomb : MonoBehaviour
             }
 
         }
-        aud.PlayOneShot(explosionSFX);
         GameObject explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
         Destroy(explosion, 5);
         Destroy(gameObject);

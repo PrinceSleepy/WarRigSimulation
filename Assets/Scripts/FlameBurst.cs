@@ -4,16 +4,29 @@ using UnityEngine;
 
 public class FlameBurst : MonoBehaviour
 {
+    public AudioSource aud;
     // Start is called before the first frame update
     void Start()
     {
-        
+        aud = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    private void OnEnable()
+    {
+        if (aud != null)
+        {
+            aud.Play();
+        }
+    }
+
+    private void OnDisable()
+    {
+        aud.Pause();
     }
     private void OnTriggerStay(Collider other)
     {

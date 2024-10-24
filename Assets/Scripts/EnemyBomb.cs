@@ -6,13 +6,8 @@ public class EnemyBomb : MonoBehaviour
 {
     [SerializeField] int bombDMG;
     [SerializeField] GameObject explosionPrefab;
-    [SerializeField] AudioClip explosionSFX;
-    AudioSource aud;
+
     // Start is called before the first frame update
-    private void Start()
-    {
-        aud = GetComponent<AudioSource>();
-    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -36,7 +31,6 @@ public class EnemyBomb : MonoBehaviour
                 damage.TakeDamage(bombDMG);
             }
         }
-        aud.PlayOneShot(explosionSFX);
         GameObject explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
         Destroy(explosion, 5);
         Destroy(gameObject);
